@@ -1,15 +1,24 @@
 resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
+  name        = "FirstSG"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = "vpc-e367d599"
 
   ingress {
     description = "TLS from VPC"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [aws_vpc.main.cidr_block]
+    cidr_blocks = [0.0.0.0/0]
   }
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [192.168.10.1/24]
+  }
+
 
   egress {
     from_port   = 0
@@ -19,6 +28,6 @@ resource "aws_security_group" "allow_tls" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "Jenkins"
   }
 }

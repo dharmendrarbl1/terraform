@@ -18,6 +18,15 @@ resource "aws_security_group" "allow_tls" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 
 
   egress {
@@ -28,6 +37,6 @@ resource "aws_security_group" "allow_tls" {
   }
 
   tags = {
-    Name = "jenkins"
+    Name = "jenkins_firsttried"
   }
 }
